@@ -1,0 +1,9 @@
+numpy
+pyfrc
+robotpy-ctre
+robotpy-rev
+robotpy-rev-color
+robotpy-wpilib-utilities
+wpilib
+pip
+setuptools
