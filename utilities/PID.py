@@ -1,4 +1,6 @@
 from time import sleep
+
+
 class PID(object):
     def __init__(self, kp, ki, kd, kf):
         super().__init__()
@@ -107,7 +109,7 @@ class PID(object):
         :return: output value for the motor,
         outVel is the sum of p i d plus the feed forward
         """
-        self.outputVel += self.getp(inval) + self.getI(inval) + self.getd(inval) + self.EstF()
+        self.outputVel = self.getp(inval) + self.getI(inval) + self.getd(inval)
         if self.outputVel > self.limit:
             self.outputVel = self.limit
 
@@ -116,9 +118,7 @@ class PID(object):
 
         self.pastError = self.getError(inval)
 
-        sleep(0.03)
-
-        return self.outputVel
+        return self.EstF() + self.outputVel
 
     def outVal(self, inval):
         """
