@@ -3,18 +3,21 @@ from wpilib import SmartDashboard
 from commandbased import CommandBasedRobot
 from wpilib.command import Scheduler
 
+from robotMap import RobotMap
 from helper import Creator
+from subsystems.drive import Drive
 
 
 class Robot(CommandBasedRobot):
-
-    TestVar = 0
 
     def robotInit(self):
         super().__init__(self)
         # init robot subs and commands
 
         self.Creator = Creator()  # program to create robot parts for subs
+        self.botMap = RobotMap(self)
+
+        self.Drive = Drive(self)
 
         self.selectedAuto = None
 

@@ -1,6 +1,7 @@
 from ctre import TalonSRX
 from ctre import VictorSPX
 from ctre import TalonFX
+from ctre import StatorCurrentLimitConfiguration
 from rev import SparkMax
 from wpilib import VictorSP
 from wpilib import Joystick
@@ -49,6 +50,11 @@ class Creator:
             return motr
         else:
             print("IDK your motor")
+
+    def createCurrentConfig(self, configSpec):
+        config = StatorCurrentLimitConfiguration(configSpec['state'], configSpec['currentLimit'],
+                                                 configSpec['triggerThresh'], configSpec['time'])
+        return config
 
     def createPistons(self, pistonSpec):
         piston = None

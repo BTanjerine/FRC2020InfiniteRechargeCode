@@ -8,6 +8,20 @@ class RobotMap:
         self.PneumaticMap = PneumaticMap()
         self.ControlMap = ControlMap()
 
+        self.currentConfig = {
+            'Fly': {
+                'state': True,
+                'currentLimit': 25,
+                'triggerThresh': 35,
+                'time': 0.5
+            },
+            'Drive': {
+                'state': True,
+                'currentLimit': 35,
+                'triggerThresh': 40,
+                'time': 0.5
+            }}
+
 
 class MotorMap:
     def __init__(self):
@@ -110,11 +124,14 @@ class PneumaticMap:
         Drive Pistons
         """
         self.pistons['Shifter'] = {'portA': 0, 'portB': 1, 'Type': 'Double', 'masterPort': 0}
+        self.pistons['flyShifter'] = {'portA': 2, 'Type': 'Single', 'masterPort': 0}
 
         """
         Intake Pistons
         """
-        self.pistons['intakeArm'] = {'portA': 1, 'portB': 2, 'Type': 'Double', 'masterPort': 0}
+        self.pistons['intakeArm'] = {'portA': 3, 'portB': 4, 'Type': 'Double', 'masterPort': 0}
+        self.pistons['ballStopper'] = {'portA': 5, 'portB': 6, 'Type': 'Double', 'masterPort': 0}
+        self.pistons['liftRelease'] = {'portA': 0, 'portB': 1, 'Type': 'Double', 'masterPort': 1}
 
 
 class ControlMap:
