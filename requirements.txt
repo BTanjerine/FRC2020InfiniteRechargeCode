@@ -1,10 +1,8 @@
-numpy ~= 1.18
-pyfrc ~= 2020.0
-robotpy-ctre ~= 2020.1.0
-robotpy-navx ~= 2020.1.0
-robotpy-rev ~= 2020.1.0
-robotpy-rev-color ~= 2020.1.0
-robotpy-wpilib-utilities ~= 2020.1.0
-wpilib ~= 2020.2.2.8
+pyfrc ~= 2020.0.5
+robotpy-ctre ~= 2020.2.1
+robotpy-rev ~= 2020.1.0.04
+robotpy-rev-color ~= 2020.1.0.1
+robotpy-wpilib-utilities ~= 2020.1.1
+wpilib ~= 2020.2.2.13
 pip
 setuptools ~= 45.2.0
