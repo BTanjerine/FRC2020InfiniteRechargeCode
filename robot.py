@@ -5,7 +5,11 @@ from wpilib.command import Scheduler
 
 from robotMap import RobotMap
 from helper import Creator
+from oi import OI
+
 from subsystems.drive import Drive
+
+from commands.teleop import TeleOp
 
 
 class Robot(CommandBasedRobot):
@@ -16,6 +20,11 @@ class Robot(CommandBasedRobot):
 
         self.Creator = Creator()  # program to create robot parts for subs
         self.botMap = RobotMap(self)
+        self.oi = OI(self)
+
+        self.drive = Drive(self)
+
+        self.teleop = TeleOp(self)
 
         self.Drive = Drive(self)
 
@@ -49,13 +58,12 @@ class Robot(CommandBasedRobot):
 
     def teleopInit(self):
         # stops old auto and goes to teleop
-        """self.selectedAuto.cancel()
-        self.teleOp.start()     # start teleop"""
-        pass
+        # self.selectedAuto.cancel()
+        self.teleop.start()     # start teleop"""
 
     def teleopPeriodic(self):
         # self.log()  # log important data on to smartdashboard
-        pass
+        self.log()
 
     def disabledInit(self):
         pass  # nothing

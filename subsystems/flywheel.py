@@ -33,8 +33,9 @@ class Flywheel(Subsystem):
         for name in self.fmotor:
             self.fMotors[name].setInverted(self.robot.botMap.motorMap.motors[name]['inverted'])
             self.fMotors[name].setNeutralMode(ctre.NeutralMode.Coast)
-            self.fMotors[name].configStatorCurrentLimit(self.robot.Creator.createCurrentConfig(
-                self.robot.botMap.currentConfig['Flywheel']), 40)
+            if self.map.motorMap.motors[name]['CurLimit'] is True:
+                self.fMotors[name].configStatorCurrentLimit(self.robot.Creator.createCurrentConfig(
+                    self.robot.botMap.currentConfig['Flywheel']), 40)
 
     def periodic(self):
         pass

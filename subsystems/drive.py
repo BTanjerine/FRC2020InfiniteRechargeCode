@@ -17,12 +17,14 @@ class Drive(Subsystem):
         motors = {}
         pistons = {}
 
-        for name in self.robot.botMap.motorMap.motors:
-            motors['name'] = self.robot.Creator.createMotor(self.robot.botMap.motorMap.motors['name'])
+        self.map = self.robot.botMap
+
+        for name in self.map.motorMap.motors:
+            motors[name] = robot.Creator.createMotor(self.map.motorMap.motors[name])
 
         for name in self.robot.botMap.PneumaticMap.pistons:
             if name == 'Shifter':
-                pistons['name'] = self.robot.Creator.createPistons(self.robot.botMap.PneumaticMap.pistons['name'])
+                pistons[name] = self.robot.Creator.createPistons(self.robot.botMap.PneumaticMap.pistons[name])
 
         self.dMotors = motors
         self.dPistons = pistons
@@ -30,8 +32,13 @@ class Drive(Subsystem):
         for name in self.dMotors:
             self.dMotors[name].setInverted(self.robot.botMap.motorMap.motors[name]['inverted'])
             self.dMotors[name].setNeutralMode(ctre.NeutralMode.Coast)
-            self.dMotors[name].configStatorCurrentLimit(self.robot.Creator.createCurrentConfig(
-                self.robot.botMap.currentConfig['Drive']), 40)
+            if self.map.motorMap.motors[name]['CurLimit'] is True:
+                self.dMotors[name].configStatorCurrentLimit(self.robot.Creator.createCurrentConfig(
+                    self.robot.botMap.currentConfig['Drive']), 40)
+
+    def set(self, lft, rgt):
+        self.dMotors['RFDrive'].set(ctre.ControlMode.PercentOutput, rgt)
+        self.dMotors['LFDrive'].set(ctre.ControlMode.PercentOutput, lft)
 
 
 
