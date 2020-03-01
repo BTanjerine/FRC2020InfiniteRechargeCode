@@ -8,6 +8,8 @@ from helper import Creator
 from oi import OI
 
 from subsystems.drive import Drive
+from subsystems.flywheel import Flywheel
+from subsystems.testelectronics import testElectronics
 
 from commands.teleop import TeleOp
 
@@ -23,6 +25,7 @@ class Robot(CommandBasedRobot):
         self.oi = OI(self)
 
         self.drive = Drive(self)
+        self.testMot = testElectronics(self)
 
         self.teleop = TeleOp(self)
 

@@ -2,7 +2,7 @@ from time import sleep
 
 
 class PID(object):
-    def __init__(self, kp, ki, kd, kf):
+    def __init__(self, kp, ki, kd, kf=0):
         super().__init__()
 
         self.kp = kp

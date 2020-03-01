@@ -37,6 +37,13 @@ class Flywheel(Subsystem):
                 self.fMotors[name].configStatorCurrentLimit(self.robot.Creator.createCurrentConfig(
                     self.robot.botMap.currentConfig['Flywheel']), 40)
 
+        self.kP = 0.0
+        self.kI = 0.0
+        self.kD = 0.0
+        self.kF = 0.0
+
+        self.flywheelPID = PID(self.kP, self.kI, self.kD, self.kF)
+
     def periodic(self):
         pass
 

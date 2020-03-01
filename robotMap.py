@@ -32,7 +32,7 @@ class MotorMap:
         Drive Motors
         """
         self.motors['RFDrive'] = {
-            'port': 1,
+            'port': 0,
             'inverted': True,
             'jobType': 'master',
             'ContType': 'CAN',
@@ -40,63 +40,63 @@ class MotorMap:
             'CurLimit': True}
 
         self.motors['RMDrive'] = {
-            'port': 4,
+            'port': 2,
             'inverted': True,
             'jobType': 'slave',
-            'masterPort': 1,
+            'masterPort': 0,
             'ContType': 'CAN',
             'Type': 'TalonFX',
             'CurLimit': True}
         self.motors['RBDrive'] = {
-            'port': 7,
+            'port': 1,
             'inverted': True,
             'jobType': 'slave',
-            'masterPort': 1,
+            'masterPort': 0,
             'ContType': 'CAN',
             'Type': 'TalonFX',
             'CurLimit': True}
 
         self.motors['LFDrive'] = {
-            'port': 9,
+            'port': 5,
             'inverted': False,
             'jobType': 'master',
             'ContType': 'CAN',
             'Type': 'TalonFX',
             'CurLimit': True}
         self.motors['LMDrive'] = {
-            'port': 0,
+            'port': 4,
             'inverted': False,
             'jobType': 'slave',
-            'masterPort': 9,
+            'masterPort': 5,
             'ContType': 'CAN',
             'Type': 'TalonFX',
             'CurLimit': True}
         self.motors['LBDrive'] = {
-            'port': 2,
+            'port': 3,
             'inverted': False,
             'jobType': 'slave',
-            'masterPort': 9,
+            'masterPort': 5,
             'ContType': 'CAN',
             'Type': 'TalonFX',
             'CurLimit': True}
 
         """
         Arm Motors
-        
+        """
         self.motors['RLift'] = {
-            'port': 3,
+            'port': 11,
             'inverted': False,
             'jobType': 'master',
             'ContType': 'CAN',
             'Type': 'TalonSRX',
             'CurLimit': False}
         self.motors['LLift'] = {
-            'port': 6,
+            'port': 12,
             'inverted': True,
             'jobType': 'master',
             'ContType': 'CAN',
             'Type': 'TalonSRX',
-            'CurLimit': False}"""
+            'CurLimit': False}
 
         """
         Shooter Motors
@@ -119,13 +119,17 @@ class MotorMap:
 
         """
         Intake motors
-        
-        self.motors['intake'] = {'port': 12, 'inverted': False, 'jobType': 'master',
+        """
+        self.motors['intake'] = {'port': 13, 'inverted': False, 'jobType': 'master',
                                  'ContType': 'CAN', 'Type': 'TalonSRX', 'CurLimit': False}
-        self.motors['transition'] = {'port': 13, 'inverted': False, 'jobType': 'master',
+        self.motors['WOF'] = {'port': 14, 'inverted': False, 'jobType': 'master',
                                      'ContType': 'CAN', 'Type': 'TalonSRX', 'CurLimit': False}
-        self.motors['conveyor'] = {'port': 14, 'inverted': False, 'jobType': 'master',
-                                   'ContType': 'CAN', 'Type': 'TalonSRX', 'CurLimit': False}"""
+        self.motors['conveyor1'] = {'port': 15, 'inverted': False, 'jobType': 'master',
+                                   'ContType': 'CAN', 'Type': 'TalonSRX', 'CurLimit': False}
+        self.motors['conveyor2'] = {'port': 16, 'inverted': False, 'jobType': 'master',
+                                    'ContType': 'CAN', 'Type': 'TalonSRX', 'CurLimit': False}
+        self.motors['turret'] = {'port': 17, 'inverted': False, 'jobType': 'master',
+                                    'ContType': 'CAN', 'Type': 'TalonSRX', 'CurLimit': False}
 
 
 class PneumaticMap:
