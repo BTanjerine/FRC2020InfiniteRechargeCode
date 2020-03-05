@@ -12,7 +12,6 @@ class TeleOp(Command):
         self.controller = robot.oi.getMainController()  # get controller class
         self.sideCon = robot.oi.getSideController()     # get side controller class
 
-
     def execute(self):
         y = -self.controller.getY(self.controller.Hand.kLeftHand)  # drive y axis percent output
         x = self.controller.getX(self.controller.Hand.kRightHand)  # drive x axis percent output

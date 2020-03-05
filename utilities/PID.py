@@ -74,7 +74,6 @@ class PID(object):
 
     def getd(self, inval):
         """
-
         :param inval: sensor input
         :return: derivative, deltaError * kD,
         derivative is rate of change
@@ -100,7 +99,6 @@ class PID(object):
         either 1 or -1
         """
         self.limit = limitval
-        return self.limit
 
     def outVel(self, inval):
         """

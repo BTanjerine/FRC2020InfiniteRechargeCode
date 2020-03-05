@@ -11,6 +11,7 @@ class Limelight(Subsystem):
         Subsystem.__init__(self, 'Limelight')
 
         self.limelight = NetworkTables.getTable('limelight')
+        self.limelight2 = NetworkTables.getTable('limelight2')
 
     def getX(self):
         px = self.limelight.getNumber("tx", 0)

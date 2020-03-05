@@ -4,6 +4,7 @@ from wpilib.command import Subsystem
 from wpilib import Encoder
 from wpilib import DoubleSolenoid
 
+
 class Intake(Subsystem):
     def __init__(self, robot):
         Subsystem.__init__(self, 'Intake')
@@ -30,6 +31,9 @@ class Intake(Subsystem):
             if self.map.MotorMap.motors[name]['CurLimit'] is True:
                 self.dMotors[name].configStatorCurrentLimit(self.robot.Creator.createCurrentConfig(
                     self.robot.botMap.currentConfig['Intake']), 40)
+
+        self.iOut = wpilib.DoubleSolenoid.Value.kForward
+        self.iIn = wpilib.DoubleSolenoid.Value.kReverse
 
     def setIntake(self, pow):
         self.imotor['intake'].set(ctre.ControlMode.PercentOutput, pow)

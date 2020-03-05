@@ -16,8 +16,8 @@ class Flywheel(Subsystem):
         self.FVelocity = 0
 
         self.robot = robot
-        self.Fenc = Encoder(0, 1, False, Encoder.EncodingType.k4X)
-
+        self.Fenc = Encoder(6, 7, False, Encoder.EncodingType.k4X)
+        self.map = self.robot.botMap
         motor = {}
         piston = {}
 
@@ -31,11 +31,11 @@ class Flywheel(Subsystem):
         self.fpiston = piston
 
         for name in self.fmotor:
-            self.fMotors[name].setInverted(self.robot.botMap.motorMap.motors[name]['inverted'])
-            self.fMotors[name].setNeutralMode(ctre.NeutralMode.Coast)
+            self.fmotor[name].setInverted(self.robot.botMap.motorMap.motors[name]['inverted'])
+            self.fmotor[name].setNeutralMode(ctre.NeutralMode.Coast)
             if self.map.motorMap.motors[name]['CurLimit'] is True:
-                self.fMotors[name].configStatorCurrentLimit(self.robot.Creator.createCurrentConfig(
-                    self.robot.botMap.currentConfig['Flywheel']), 40)
+                self.fmotor[name].configStatorCurrentLimit(self.robot.Creator.createCurrentConfig(
+                    self.robot.botMap.currentConfig['Fly']), 40)
 
         self.kP = 0.0
         self.kI = 0.0
@@ -43,6 +43,10 @@ class Flywheel(Subsystem):
         self.kF = 0.0
 
         self.flywheelPID = PID(self.kP, self.kI, self.kD, self.kF)
+
+    def log(self):
+        wpilib.SmartDashboard.putNumber('Flywheel Enc', self.Fenc.get())
+        wpilib.SmartDashboard.putNumber('Flywheel Vel', self.getVelocity())
 
     def periodic(self):
         pass

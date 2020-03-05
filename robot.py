@@ -8,8 +8,11 @@ from helper import Creator
 from oi import OI
 
 from subsystems.drive import Drive
-from subsystems.flywheel import Flywheel
 from subsystems.testelectronics import testElectronics
+from subsystems.turret import Turret
+from subsystems.limelight import Limelight
+from subsystems.flywheel import Flywheel
+
 
 from commands.teleop import TeleOp
 
@@ -24,12 +27,15 @@ class Robot(CommandBasedRobot):
         self.botMap = RobotMap(self)
         self.oi = OI(self)
 
-        self.drive = Drive(self)
         self.testMot = testElectronics(self)
 
         self.teleop = TeleOp(self)
 
         self.Drive = Drive(self)
+
+        self.Flywheel = Flywheel(self)
+
+        self.Limelight = Limelight(self)
 
         self.selectedAuto = None
 
