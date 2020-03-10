@@ -12,6 +12,8 @@ from subsystems.testelectronics import testElectronics
 from subsystems.turret import Turret
 from subsystems.limelight import Limelight
 from subsystems.flywheel import Flywheel
+from subsystems.intake import Intake
+from subsystems.conveyor import Conveyor
 
 
 from commands.teleop import TeleOp
@@ -27,17 +29,14 @@ class Robot(CommandBasedRobot):
         self.botMap = RobotMap(self)
         self.oi = OI(self)
 
-        self.testMot = testElectronics(self)
-
         self.teleop = TeleOp(self)
 
         self.Drive = Drive(self)
-
         self.Flywheel = Flywheel(self)
-
         self.Limelight = Limelight(self)
-
-        self.selectedAuto = None
+        self.Intake = Intake(self)
+        self.Conveyor = Conveyor(self)
+        self.Turret = Turret(self)
 
         self.s = Scheduler
 
@@ -45,7 +44,7 @@ class Robot(CommandBasedRobot):
         self.s.getInstance().run()  # run auto
 
     def log(self):
-        pass
+        self.Flywheel.log()
 
     def autonomousInit(self):
         # choose auto program

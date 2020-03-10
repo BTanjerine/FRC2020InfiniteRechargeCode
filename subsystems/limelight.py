@@ -11,7 +11,7 @@ class Limelight(Subsystem):
         Subsystem.__init__(self, 'Limelight')
 
         self.limelight = NetworkTables.getTable('limelight')
-        self.limelight2 = NetworkTables.getTable('limelight2')
+        # self.limelight2 = NetworkTables.getTable('limelight2')
 
     def getX(self):
         px = self.limelight.getNumber("tx", 0)
@@ -20,6 +20,9 @@ class Limelight(Subsystem):
     def getY(self):
         py = self.limelight.getNumber("ty", 0)
         return py
+
+    def isExisting(self):
+        return self.limelight.getNumber("tv", 0)
 
     def getDistance(self):
         h = 50.5

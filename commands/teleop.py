@@ -15,9 +15,15 @@ class TeleOp(Command):
     def execute(self):
         y = -self.controller.getY(self.controller.Hand.kLeftHand)  # drive y axis percent output
         x = self.controller.getX(self.controller.Hand.kRightHand)  # drive x axis percent output
+        joyFly = self.sideCon.getRawButton(3)
+        joyTur = self.sideCon.getRawAxis(1)
+        joyIn = self.controller.getAButton()
+        joyUp = self.sideCon.getRawButton(7)
+        joyStay = self.sideCon.getRawButton(8)
+        joyDown = self.sideCon.getRawButton(9)
 
-        rgtArc = y - x
-        lftArc = y + x
+        rgtArc = 0 # y - x
+        lftArc = 0 # y + x
 
         if abs(rgtArc) < 0.05:
             rgtArc = 0
@@ -29,40 +35,31 @@ class TeleOp(Command):
 
         self.robot.Drive.set(lftArc, rgtArc)
 
-        if self.sideCon.getRawButton(1):
-            self.robot.testMot.set(0, 0.7)
+        if joyIn:
+            self.robot.Intake.setIntake(0.9)
         else:
-            self.robot.testMot.set(0, 0)
+            self.robot.Intake.setIntake(0)
 
-        if self.sideCon.getRawButton(2):
-            self.robot.testMot.set(1, 0.7)
+        if joyFly:
+            self.robot.Flywheel.set(self.robot.Flywheel.setVelocityPID(460))
+        elif self.sideCon.getRawButton(2):
+            self.robot.Flywheel.set(0.6)
         else:
-            self.robot.testMot.set(1, 0)
+            self.robot.Flywheel.set(0)
 
-        if self.sideCon.getRawButton(3):
-            self.robot.testMot.set(2, 0.75)
+        if joyUp:
+            self.robot.Conveyor.set(0.9)
+        elif joyDown:
+            self.robot.Conveyor.set(-0.8)
+        elif joyStay:
+            self.robot.Conveyor.stay(0.3)
         else:
-            self.robot.testMot.set(2, 0)
+            self.robot.Conveyor.set(0)
 
-        if self.sideCon.getRawButton(4):
-            self.robot.testMot.set(3, 0.7)
+        if joyTur:
+            self.robot.Turret.setPower(0.6)
         else:
-            self.robot.testMot.set(3, 0)
-
-        if self.sideCon.getRawButton(5):
-            self.robot.testMot.set(4, 0.7)
-        else:
-            self.robot.testMot.set(4, 0)
-
-        if self.sideCon.getRawButton(6):
-            self.robot.testMot.set(5, 0.7)
-        else:
-            self.robot.testMot.set(5, 0)
-
-        if self.sideCon.getRawButton(7):
-            self.robot.testMot.set(6, 0.7)
-        else:
-            self.robot.testMot.set(6, 0)
+            self.robot.Turret.setPower(0)
 
     def isFinished(self):
         return False

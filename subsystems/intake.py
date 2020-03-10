@@ -16,8 +16,8 @@ class Intake(Subsystem):
 
         self.map = self.robot.botMap
 
-        for name in self.map.MotorMap.motors:
-            motors[name] = robot.Creator.createMotor(self.map.MotorMap.motors[name])
+        for name in self.map.motorMap.motors:
+            motors[name] = robot.Creator.createMotor(self.map.motorMap.motors[name])
 
         for name in self.map.PneumaticMap.pistons:
             pistons[name] = robot.Creator.createPistons(self.map.PneumaticMap.pistons[name])
@@ -26,17 +26,14 @@ class Intake(Subsystem):
         self.ipistons = pistons
 
         for name in self.imotors:
-            self.imotors[name].setInverted(self.map.motors[name]['inverted'])
+            self.imotors[name].setInverted(self.map.motorMap.motors[name]['inverted'])
             self.imotors[name].setNeutralMode(ctre.NeutralMode.Coast)
-            if self.map.MotorMap.motors[name]['CurLimit'] is True:
-                self.dMotors[name].configStatorCurrentLimit(self.robot.Creator.createCurrentConfig(
-                    self.robot.botMap.currentConfig['Intake']), 40)
 
         self.iOut = wpilib.DoubleSolenoid.Value.kForward
         self.iIn = wpilib.DoubleSolenoid.Value.kReverse
 
     def setIntake(self, pow):
-        self.imotor['intake'].set(ctre.ControlMode.PercentOutput, pow)
+        self.imotors['intake'].set(ctre.ControlMode.PercentOutput, pow)
 
     def angleIntake(self, Mode):
         self.ipistons['intakeArm'].set(Mode)

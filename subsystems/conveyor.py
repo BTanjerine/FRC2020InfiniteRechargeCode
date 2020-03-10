@@ -23,9 +23,6 @@ class Conveyor(Subsystem):
         for name in self.cMotors:
             self.cMotors[name].setInverted(self.map.motorMap.motors[name]['inverted'])
             self.cMotors[name].setNeutralMode(ctre.NeutralMode.Coast)
-            if self.map.Motormap.motors[name]['CurLimit'] is True:
-                self.cMotors[name].configStatorCurrentLimit(self.robot.Creator.createCurrentConfig(
-                    self.robot.botMap.currentConfig['Conveyor']), 40)
 
     def log(self):
         wpilib.SmartDashboard.putNumber('Infared Value', self.blaser.get())
@@ -33,6 +30,10 @@ class Conveyor(Subsystem):
     def set(self, pw):
         self.cMotors['conveyor1'].set(ctre.ControlMode.PercentOutput, pw)
         self.cMotors['conveyor2'].set(ctre.ControlMode.PercentOutput, pw)
+
+    def stay(self, pw):
+        self.cMotors['conveyor1'].set(ctre.ControlMode.PercentOutput, pw)
+        self.cMotors['conveyor2'].set(ctre.ControlMode.PercentOutput, -pw)
 
     def getblaser(self):
         y = self.blaser.get()

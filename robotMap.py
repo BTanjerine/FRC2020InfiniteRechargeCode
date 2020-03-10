@@ -100,35 +100,33 @@ class MotorMap:
 
         """
         Shooter Motors
-        
+        """
         self.motors['RFly'] = {
-            'port': 17,
-            'inverted': True,
+            'port': 6,
+            'inverted': False,
             'jobType': 'master',
             'ContType': 'CAN',
             'Type': 'TalonFX',
             'CurLimit': True}
         self.motors['LFly'] = {
-            'port': 18,
-            'inverted': False,
+            'port': 7,
+            'inverted': True,
             'jobType': 'slave',
             'masterPort': 10,
             'ContType': 'CAN',
             'Type': 'TalonFX',
-            'CurLimit': True}"""
+            'CurLimit': True}
 
         """
         Intake motors
         """
-        self.motors['intake'] = {'port': 13, 'inverted': False, 'jobType': 'master',
+        self.motors['intake'] = {'port': 17, 'inverted': True, 'jobType': 'master',
                                  'ContType': 'CAN', 'Type': 'TalonSRX', 'CurLimit': False}
-        self.motors['WOF'] = {'port': 14, 'inverted': False, 'jobType': 'master',
-                                     'ContType': 'CAN', 'Type': 'TalonSRX', 'CurLimit': False}
-        self.motors['conveyor1'] = {'port': 15, 'inverted': False, 'jobType': 'master',
+        self.motors['conveyor1'] = {'port': 16, 'inverted': False, 'jobType': 'master',
                                    'ContType': 'CAN', 'Type': 'TalonSRX', 'CurLimit': False}
-        self.motors['conveyor2'] = {'port': 16, 'inverted': False, 'jobType': 'master',
+        self.motors['conveyor2'] = {'port': 11, 'inverted': False, 'jobType': 'master',
                                     'ContType': 'CAN', 'Type': 'TalonSRX', 'CurLimit': False}
-        self.motors['turret'] = {'port': 17, 'inverted': False, 'jobType': 'master',
+        self.motors['turret'] = {'port': 15, 'inverted': False, 'jobType': 'master',
                                     'ContType': 'CAN', 'Type': 'TalonSRX', 'CurLimit': False}
 
 
@@ -142,16 +140,16 @@ class PneumaticMap:
 
         """
         Drive Pistons
-        
+        """
         self.pistons['shifter'] = {'portA': 0, 'portB': 1, 'Type': 'Double'}
-        self.pistons['flyShifter'] = {'portA': 2, 'Type': 'Single'}"""
+        self.pistons['flyShifter'] = {'portA': 2, 'Type': 'single'}
 
         """
         Intake Pistons
-        
+        """
         self.pistons['intakeArm'] = {'portA': 3, 'portB': 4, 'Type': 'Double'}
         self.pistons['ballStopper'] = {'portA': 5, 'portB': 6, 'Type': 'Double'}
-        self.pistons['liftRelease'] = {'portA': 0, 'portB': 1, 'Type': 'Double'}"""
+        self.pistons['liftRelease'] = {'portA': 0, 'portB': 1, 'Type': 'Double'}
 
 
 class ControlMap:

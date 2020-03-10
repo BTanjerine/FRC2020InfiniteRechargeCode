@@ -59,9 +59,9 @@ class Creator:
     def createPistons(self, pistonSpec):
         piston = None
         if pistonSpec['Type'] == 'Double':
-            piston = DoubleSolenoid(pistonSpec['masterPort'], pistonSpec['portA'], pistonSpec['portB'])
+            piston = DoubleSolenoid(pistonSpec['portA'], pistonSpec['portB'])
         elif pistonSpec['Type'] == 'single':
-            piston = Solenoid(pistonSpec['masterPort'], pistonSpec['portA'])
+            piston = Solenoid(pistonSpec['portA'])
         else:
             print("IDK your pistons")
         return piston

@@ -13,7 +13,6 @@ class Flywheel(Subsystem):
 
         self.CurPos = 0
         self.PasPos = 0
-        self.FVelocity = 0
 
         self.robot = robot
         self.Fenc = Encoder(6, 7, False, Encoder.EncodingType.k4X)
@@ -37,32 +36,47 @@ class Flywheel(Subsystem):
                 self.fmotor[name].configStatorCurrentLimit(self.robot.Creator.createCurrentConfig(
                     self.robot.botMap.currentConfig['Fly']), 40)
 
-        self.kP = 0.0
-        self.kI = 0.0
-        self.kD = 0.0
-        self.kF = 0.0
+        self.kP = 0.008
+        self.kI = 0.00002
+        self.kD = 0.00018
+        self.kF = 0.0   # tune me when testing
 
         self.flywheelPID = PID(self.kP, self.kI, self.kD, self.kF)
 
+        self.flywheelPID.MaxIn(680)
+        self.flywheelPID.MaxOut(1)
+        self.flywheelPID.limitVal(0.95)  # Limit PID output power to 50%
+
+        self.feetToRPS = 51.111
+
     def log(self):
         wpilib.SmartDashboard.putNumber('Flywheel Enc', self.Fenc.get())
-        wpilib.SmartDashboard.putNumber('Flywheel Vel', self.getVelocity())
+        wpilib.SmartDashboard.putNumber('Flywheel Vel', self.getVelocity(self.Fenc.get()))
 
-    def periodic(self):
-        pass
+    def init(self):
+        self.Fenc.reset()
 
     def set(self, pow):
-        self.fmotor['RFLy'].set(ctre.ControlMode.PercentOutput, pow)
-        self.fmotor['LFLy'].set(ctre.ControlMode.PercentOutput, pow)
+        self.fmotor['RFly'].set(ctre.ControlMode.PercentOutput, pow)
+        self.fmotor['LFly'].set(ctre.ControlMode.PercentOutput, pow)
+
+    def setVelocityPID(self, rps):
+        self.flywheelPID.setPoint(rps)
+        if rps == 0:
+            pow = 0
+        else:
+            pow = self.flywheelPID.outVel(self.getVelocity(self.get()))
+        return pow
 
     def get(self):
         return self.Fenc.get()
 
-    def getVelocity(self):
-        self.FVelocity = (self.CurPos - self.PasPos) / 0.02
-        self.CurPos = -(self.fly.get() / 1025) * (2 * math.pi)
+    def getVelocity(self, input):
+        self.CurPos = -(input / 1025) * (2 * math.pi)
+        vel = (self.CurPos - self.PasPos) / 0.02
         self.PasPos = self.CurPos
-        return self.FVelocity
+        return vel
+
 
 
 
