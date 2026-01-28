@@ -49,6 +49,7 @@ class Drive(Subsystem):
         wpilib.SmartDashboard.putNumber('RDrive Enc', self.rEnc.get())
         wpilib.SmartDashboard.putNumber('LDrive Enc', self.lEnc.get())
         wpilib.SmartDashboard.putNumber('Gyro Val', self.Gyro.getAngle())
+        wpilib.SmartDashboard.putNumber('Message To Driver', "LOCK IN!!!")
 
     def set(self, rgt, lft):
         self.dMotors['RFDrive'].set(ctre.ControlMode.PercentOutput, rgt)
